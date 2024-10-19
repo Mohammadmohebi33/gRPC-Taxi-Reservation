@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package customer;
+
+option go_package = "/";
+
+service CustomerService {
+  rpc ReserveTaxi(RequestTaxi) returns (RequestTaxi);
+}
+
+message RequestTaxi {
+  uint64 user_id = 1;
+  string pickup_location = 2;
+  string drop_location = 3;
+}
+
+message ResponseTaxi {
+  uint64 booking_id = 1;
+  string status = 2;
+}

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+
+package booking;
+
+option go_package = "/";
+
+service BookingService {
+  rpc CreateBooking(CreateBookingRequest) returns (CreateBookingResponse);
+  rpc UpdateBooking(UpdateBookingRequest) returns (UpdateBookingResponse);
+}
+
+message CreateBookingRequest {
+  uint64 user_id = 1;
+  string pickup_location = 2;
+  string drop_location = 3;
+}
+
+message CreateBookingResponse {
+  uint64 booking_id = 1;
+  string status = 2;
+}
+
+message UpdateBookingRequest {
+  uint64 booking_id = 1;
+  string status = 2;
+}
+
+message UpdateBookingResponse {
+  uint64 booking_id = 1;
+  string status = 2;
+}

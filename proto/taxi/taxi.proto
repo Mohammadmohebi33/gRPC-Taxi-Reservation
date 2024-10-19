@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package taxi;
+
+option go_package = "/";
+
+service TaxiService {
+  rpc AssignTaxi(AssignTaxiRequest) returns (AssignTaxiResponse);
+}
+
+message AssignTaxiRequest {
+  uint64 booking_id = 1;
+  string pickup_location = 2;
+}
+
+message AssignTaxiResponse {
+  uint64 taxi_id = 1;
+  string driver_name = 2;
+  string car_model = 3;
+  string status = 4;
+}
