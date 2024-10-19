@@ -5,7 +5,7 @@ package customer;
 option go_package = "/";
 
 service CustomerService {
-  rpc ReserveTaxi(RequestTaxi) returns (RequestTaxi);
+  rpc ReserveTaxi(RequestTaxi) returns (ResponseTaxi);
 }
 
 message RequestTaxi {

@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CustomerServiceClient interface {
-	ReserveTaxi(ctx context.Context, in *RequestTaxi, opts ...grpc.CallOption) (*RequestTaxi, error)
+	ReserveTaxi(ctx context.Context, in *RequestTaxi, opts ...grpc.CallOption) (*ResponseTaxi, error)
 }
 
 type customerServiceClient struct {
@@ -37,9 +37,9 @@ func NewCustomerServiceClient(cc grpc.ClientConnInterface) CustomerServiceClient
 	return &customerServiceClient{cc}
 }
 
-func (c *customerServiceClient) ReserveTaxi(ctx context.Context, in *RequestTaxi, opts ...grpc.CallOption) (*RequestTaxi, error) {
+func (c *customerServiceClient) ReserveTaxi(ctx context.Context, in *RequestTaxi, opts ...grpc.CallOption) (*ResponseTaxi, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RequestTaxi)
+	out := new(ResponseTaxi)
 	err := c.cc.Invoke(ctx, CustomerService_ReserveTaxi_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (c *customerServiceClient) ReserveTaxi(ctx context.Context, in *RequestTaxi
 // All implementations must embed UnimplementedCustomerServiceServer
 // for forward compatibility.
 type CustomerServiceServer interface {
-	ReserveTaxi(context.Context, *RequestTaxi) (*RequestTaxi, error)
+	ReserveTaxi(context.Context, *RequestTaxi) (*ResponseTaxi, error)
 	mustEmbedUnimplementedCustomerServiceServer()
 }
 
@@ -62,7 +62,7 @@ type CustomerServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCustomerServiceServer struct{}
 
-func (UnimplementedCustomerServiceServer) ReserveTaxi(context.Context, *RequestTaxi) (*RequestTaxi, error) {
+func (UnimplementedCustomerServiceServer) ReserveTaxi(context.Context, *RequestTaxi) (*ResponseTaxi, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReserveTaxi not implemented")
 }
 func (UnimplementedCustomerServiceServer) mustEmbedUnimplementedCustomerServiceServer() {}
