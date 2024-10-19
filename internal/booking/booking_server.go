@@ -24,13 +24,12 @@ func (s *Server) CreateBooking(ctx context.Context, req *pb.CreateBookingRequest
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	// فرض کنیم booking_id برابر با timestamp است
 	bookingID := uint64(len(s.bookings) + 1)
-	s.bookings[bookingID] = "در حال انتظار"
+	s.bookings[bookingID] = "loading"
 
 	return &pb.CreateBookingResponse{
 		BookingId: bookingID,
-		Status:    "در حال انتظار",
+		Status:    "loading",
 	}, nil
 }
 
